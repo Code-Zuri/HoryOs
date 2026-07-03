@@ -2,35 +2,138 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>HoryOs - App del Clima</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HoryOs — Clima</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <link rel="stylesheet" href="styles.css">
+<base target="_blank">
 </head>
 <body>
-  <main class="container">
-    <h1>Clima</h1>
+  <div class="bg-overlay"></div>
 
-    <form id="searchForm" class="search">
-      <input id="cityInput" type="text" placeholder="Ciudad, p. ej. Madrid" required />
-      <button type="submit">Buscar</button>
+  <main class="app">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <i class="ph ph-cloud-sun"></i>
+        <span class="brand-name">HoryOs</span>
+      </div>
+      <div class="header-actions">
+        <button id="geoBtn" class="icon-btn" title="Usar mi ubicación" aria-label="Usar mi ubicación">
+          <i class="ph ph-crosshair"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Search -->
+    <form id="searchForm" class="search-bar">
+      <div class="search-input-wrap">
+        <i class="ph ph-magnifying-glass search-icon"></i>
+        <input id="cityInput" type="text" placeholder="Buscar ciudad..." required autocomplete="off" />
+      </div>
+      <button type="submit" class="search-btn" aria-label="Buscar">
+        <i class="ph ph-arrow-right"></i>
+      </button>
     </form>
 
-    <div id="loader" class="hidden">Cargando...</div>
+    <!-- Loader -->
+    <div id="loader" class="loader hidden">
+      <div class="spinner"></div>
+      <span class="loader-text">Consultando el clima...</span>
+    </div>
 
-    <section id="result" class="card hidden">
-      <div class="header">
-        <h2 id="cityName"></h2>
-        <img id="icon" alt="icono clima" />
+    <!-- Error -->
+    <div id="error" class="error hidden">
+      <i class="ph ph-warning-circle"></i>
+      <span id="errorText">No se encontró la ciudad</span>
+    </div>
+
+    <!-- Weather Result -->
+    <section id="result" class="weather-card hidden">
+      <!-- Main Weather -->
+      <div class="weather-main">
+        <div class="weather-icon-wrap">
+          <img id="icon" alt="icono clima" />
+        </div>
+        <div class="weather-info">
+          <h2 id="cityName" class="city-name"></h2>
+          <p id="description" class="weather-desc"></p>
+          <div class="temp-wrap">
+            <span id="temp" class="temp-value"></span>
+            <span class="temp-unit">°C</span>
+          </div>
+        </div>
       </div>
-      <p id="description" class="muted"></p>
-      <div class="metrics">
-        <div><strong id="temp"></strong>°C</div>
-        <div>Humedad: <span id="humidity"></span>%</div>
-        <div>Viento: <span id="wind"></span> m/s</div>
+
+      <!-- Metrics Grid -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="ph ph-drop"></i>
+          </div>
+          <div class="metric-data">
+            <span class="metric-label">Humedad</span>
+            <span class="metric-value"><span id="humidity"></span>%</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="ph ph-wind"></i>
+          </div>
+          <div class="metric-data">
+            <span class="metric-label">Viento</span>
+            <span class="metric-value"><span id="wind"></span> <small>m/s</small></span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="ph ph-thermometer"></i>
+          </div>
+          <div class="metric-data">
+            <span class="metric-label">Sensación</span>
+            <span class="metric-value"><span id="feelsLike"></span>°</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">
+            <i class="ph ph-gauge"></i>
+          </div>
+          <div class="metric-data">
+            <span class="metric-label">Presión</span>
+            <span class="metric-value"><span id="pressure"></span> <small>hPa</small></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extra Details -->
+      <div class="details-row">
+        <div class="detail-item">
+          <i class="ph ph-sun"></i>
+          <span class="detail-label">Amanecer</span>
+          <span id="sunrise" class="detail-value"></span>
+        </div>
+        <div class="detail-divider"></div>
+        <div class="detail-item">
+          <i class="ph ph-moon"></i>
+          <span class="detail-label">Atardecer</span>
+          <span id="sunset" class="detail-value"></span>
+        </div>
+        <div class="detail-divider"></div>
+        <div class="detail-item">
+          <i class="ph ph-eye"></i>
+          <span class="detail-label">Visibilidad</span>
+          <span id="visibility" class="detail-value"></span>
+        </div>
       </div>
     </section>
 
-    <p class="notice">La API key está embebida para propósitos de demostración.</p>
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span class="footer-text">Datos proporcionados por OpenWeather</span>
+    </footer>
   </main>
 
   <script src="app.js"></script>
