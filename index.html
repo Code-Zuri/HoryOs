@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HoryOs - App del Clima</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Clima</h1>
+
+    <form id="searchForm" class="search">
+      <input id="cityInput" type="text" placeholder="Ciudad, p. ej. Madrid" required />
+      <button type="submit">Buscar</button>
+    </form>
+
+    <div id="loader" class="hidden">Cargando...</div>
+
+    <section id="result" class="card hidden">
+      <div class="header">
+        <h2 id="cityName"></h2>
+        <img id="icon" alt="icono clima" />
+      </div>
+      <p id="description" class="muted"></p>
+      <div class="metrics">
+        <div><strong id="temp"></strong>°C</div>
+        <div>Humedad: <span id="humidity"></span>%</div>
+        <div>Viento: <span id="wind"></span> m/s</div>
+      </div>
+    </section>
+
+    <p class="notice">La API key está embebida para propósitos de demostración.</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
